@@ -7,7 +7,9 @@ public class main {
         String test = "test";
     }
 
+    public static void test(){
 
+    }
 }
 
 
