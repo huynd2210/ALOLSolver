@@ -1,7 +1,5 @@
 package main;
 
-import java.util.*;
-
 import static main.BoardMethod.findEmpty;
 import static main.Logic.*;
 

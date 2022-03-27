@@ -4,6 +4,7 @@ public class Logic {
     public static void inconsecutiveRowSolver(){
         for (int i = 0; i < Board.size; i++) {
             for (int j = 0; j < Board.size-2; j++) {
+
                 switch (Board.board[i][j]){
                     case '-' :
                         if(Board.board[i][j+1] == '0' && Board.board[i][j+2] == '0'){
