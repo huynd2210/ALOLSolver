@@ -8,7 +8,7 @@ public class BoardMethod {
         Board.size = sc.nextInt(); // set size of Board (Board is square)
         Board.board = new char[Board.size][Board.size];
                                             // initialize board
-        for (int i = 0; i < Board.size;) {  //marked with - is empty
+        for (int i = 0; i < Board.size;) {  //marked with '-' is empty
             System.out.println("Row " + ++i);
             String row = "";
 
@@ -30,6 +30,18 @@ public class BoardMethod {
             System.out.print('\n');
         }
     }
+
+    public static boolean findEmpty(){ // find empty place to fill
+        for (int row = 0; row < Board.size; row++){
+            for (int col = 0; col < Board.size; col++){
+                if (Board.board[row][col] == '-'){ //marked with '-' is empty
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 
 }
 
