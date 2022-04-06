@@ -1,24 +1,27 @@
 package main;
 
-import static main.BoardMethod.findEmpty;
-import static main.Logic.*;
+//step 1: run basic algorithm until cannot solve further:
+//-> run basic algorithm until board doesnt change using String.equals()
+//step 2: implement backtracking
 
-public class Main {
+import static main.BoardMethod.*;
+
+public class Main{
+
     public static void main(String[] args) {
-        BoardMethod.addboard();
+        Board board1 = new Board();
+        Logic logic = new Logic();
+        BoardMethod test = new BoardMethod();
+        test.addboard(board1);
 
-        BoardMethod.printBoard();
+        long start = System.nanoTime();
 
-        while(findEmpty()){
-            inconsecutiveRowSolver();
-            inconsecutiveColSolver();
-            RowCheck();
-            ColCheck();
+        test.Solve(board1, logic);
 
-        }
-
-        BoardMethod.printBoard();
-}
+        long end = System.nanoTime();
+        long execution = end - start;
+        System.out.println("Execution time: " + execution + " nanoseconds");
+    }
 
 }
 

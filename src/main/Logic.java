@@ -1,33 +1,33 @@
 package main;
 
-public class Logic {
-    public static void inconsecutiveRowSolver(){
-        for (int i = 0; i < Board.size; i++) {
-            for (int j = 0; j < Board.size-2; j++) {
+public class Logic{
+    private void inconsecutiveRowSolver(Board gameboard){
+        for (int i = 0; i < gameboard.size; i++) {
+            for (int j = 0; j < gameboard.size-2; j++) {
 
-                switch (Board.board[i][j]){
+                switch (gameboard.board[i][j]){
                     case '-' :
-                        if(Board.board[i][j+1] == '0' && Board.board[i][j+2] == '0'){
-                            Board.board[i][j] = '1';
+                        if(gameboard.board[i][j+1] == '0' && gameboard.board[i][j+2] == '0'){
+                            gameboard.board[i][j] = '1';
                         }
-                        if (Board.board[i][j+1] == '1' && Board.board[i][j+2] == '1'){
-                            Board.board[i][j] = '0';
+                        if (gameboard.board[i][j+1] == '1' && gameboard.board[i][j+2] == '1'){
+                            gameboard.board[i][j] = '0';
                         }
                         break;
                     case '1':
-                        if(Board.board[i][j+1] == '-' && Board.board[i][j+2] == '1'){
-                            Board.board[i][j+1] = '0';
+                        if(gameboard.board[i][j+1] == '-' && gameboard.board[i][j+2] == '1'){
+                            gameboard.board[i][j+1] = '0';
                         }
-                        if (Board.board[i][j+1] == '1' && Board.board[i][j+2] == '-'){
-                            Board.board[i][j+2] = '0';
+                        if (gameboard.board[i][j+1] == '1' && gameboard.board[i][j+2] == '-'){
+                            gameboard.board[i][j+2] = '0';
                         }
                         break;
                     case '0':
-                        if(Board.board[i][j+1] == '-' && Board.board[i][j+2] == '0'){
-                            Board.board[i][j+1] = '1';
+                        if(gameboard.board[i][j+1] == '-' && gameboard.board[i][j+2] == '0'){
+                            gameboard.board[i][j+1] = '1';
                         }
-                        if (Board.board[i][j+1] == '0' && Board.board[i][j+2] == '-'){
-                            Board.board[i][j+2] = '1';
+                        if (gameboard.board[i][j+1] == '0' && gameboard.board[i][j+2] == '-'){
+                            gameboard.board[i][j+2] = '1';
                         }
                         break;
                 }
@@ -35,100 +35,182 @@ public class Logic {
         }
     }
 
-    public static void inconsecutiveColSolver(){
-        for (int i = 0; i < Board.size-2; i++) {
-            for (int j = 0; j < Board.size; j++) {
-                switch (Board.board[i][j]){
+    private void inconsecutiveColSolver(Board gameboard){
+        for (int i = 0; i < gameboard.size-2; i++) {
+            for (int j = 0; j < gameboard.size; j++) {
+                switch (gameboard.board[i][j]){
                     case '-' :
-                        if(Board.board[i+1][j] == '0' && Board.board[i+2][j] == '0'){
-                            Board.board[i][j] = '1';
+                        if(gameboard.board[i+1][j] == '0' && gameboard.board[i+2][j] == '0'){
+                            gameboard.board[i][j] = '1';
                         }
-                        if (Board.board[i+1][j] == '1' && Board.board[i+2][j] == '1'){
-                            Board.board[i][j] = '0';
+                        if (gameboard.board[i+1][j] == '1' && gameboard.board[i+2][j] == '1'){
+                            gameboard.board[i][j] = '0';
                         }
                         break;
                     case '1':
-                        if(Board.board[i+1][j] == '-' && Board.board[i+2][j] == '1'){
-                            Board.board[i+1][j] = '0';
+                        if(gameboard.board[i+1][j] == '-' && gameboard.board[i+2][j] == '1'){
+                            gameboard.board[i+1][j] = '0';
                         }
-                        if (Board.board[i+1][j] == '1' && Board.board[i+2][j] == '-'){
-                            Board.board[i+2][j] = '0';
+                        if (gameboard.board[i+1][j] == '1' && gameboard.board[i+2][j] == '-'){
+                            gameboard.board[i+2][j] = '0';
                         }
                         break;
                     case '0':
-                        if(Board.board[i+1][j] == '-' && Board.board[i+2][j] == '0'){
-                            Board.board[i+1][j] = '1';
+                        if(gameboard.board[i+1][j] == '-' && gameboard.board[i+2][j] == '0'){
+                            gameboard.board[i+1][j] = '1';
                         }
-                        if (Board.board[i+1][j] == '0' && Board.board[i+2][j] == '-'){
-                            Board.board[i+2][j] = '1';
+                        if (gameboard.board[i+1][j] == '0' && gameboard.board[i+2][j] == '-'){
+                            gameboard.board[i+2][j] = '1';
                         }
                         break;
                 }
             }
         }
     }
-
-    public static void RowFill(int i, char missingelement){
-        for (int j = 0; j < Board.size; j++) {
-            if (Board.board[i][j] == '-'){
-                Board.board[i][j] = missingelement;
+            // merge with colfill (rename)
+    private void RowFill(Board gameboard, int i, char missingelement){
+        for (int j = 0; j < gameboard.size; j++) {
+            if (gameboard.board[i][j] == '-'){
+                gameboard.board[i][j] = missingelement;
             }
         }
     }
 
-    public static void RowCheck(){
-        for (int i = 0; i < Board.size; i++){
+    public void RowSolve(Board gameboard){
+        inconsecutiveRowSolver(gameboard);
+        for (int i = 0; i < gameboard.size; i++){
             int count0 = 0;
             int count1 = 0;
             int missing = 0;
-            for (int j = 0; j < Board.size; j++){
-                if (Board.board[i][j] == '1'){
+            for (int j = 0; j < gameboard.size; j++){
+                if (gameboard.board[i][j] == '1'){
                     count1++;
-                }else if (Board.board[i][j] == '0'){
+                }else if (gameboard.board[i][j] == '0'){
                     count0++;
                 }else{
                     missing++;
                 }
             }
-            if (missing !=0 && missing < Board.size/2 && count1 == Board.size/2){
-                RowFill(i,'0');
-            }else if (missing !=0 && missing < Board.size/2 && count0 == Board.size/2){
-                RowFill(i,'1');
+            if (missing !=0 && missing < gameboard.size/2){
+                if(count1 == gameboard.size/2){
+                    RowFill(gameboard, i,'0');
+                }
+                if (count0 == gameboard.size/2){
+                    RowFill(gameboard, i,'1');
+                }
             }
 
+            if(missing > 2){
+                if (count1 >2 || count0 >2){
+                    Logic3Row(gameboard, i);
+                }
+                if (gameboard.size - count0 == 1 || gameboard.size - count1 == 1){
+                    Logic4Row(gameboard, i);
+                }
+            }
         }
     }
 
 
-    public static void ColFill(int j, char missingelement){
-        for (int i = 0; i < Board.size; i++) {
-            if (Board.board[i][j] == '-'){
-                Board.board[i][j] = missingelement;
+    private void ColFill(Board gameboard, int j, char missingelement){
+        for (int i = 0; i < gameboard.size; i++) {
+            if (gameboard.board[i][j] == '-'){
+                gameboard.board[i][j] = missingelement;
             }
         }
     }
 
-    public static void ColCheck(){
-        for (int j = 0; j < Board.size; j++){
+    public void ColSolve(Board gameboard){
+        inconsecutiveColSolver(gameboard);
+        for (int j = 0; j < gameboard.size; j++){
             int count0 = 0;
             int count1 = 0;
             int missing = 0;
-            for (int i = 0; i < Board.size; i++){
-                if (Board.board[i][j] == '1'){
+            for (int i = 0; i < gameboard.size; i++){
+                if (gameboard.board[i][j] == '1'){
                     count1++;
-                }else if (Board.board[i][j] == '0'){
+                }else if (gameboard.board[i][j] == '0'){
                     count0++;
                 }else{
                     missing++;
                 }
             }
-            if (missing !=0 && missing < Board.size/2 && count1 == Board.size/2){
-                ColFill(j,'0');
-            }else if (missing !=0 && missing < Board.size/2 && count0 == Board.size/2){
-                ColFill(j,'1');
+
+            if (missing !=0 && missing < gameboard.size/2){
+                if(count1 == gameboard.size/2){
+                    ColFill(gameboard, j,'0');
+                }
+                if (count0 == gameboard.size/2){
+                    ColFill(gameboard, j,'1');
+                }
             }
 
+            if(missing > 2){
+                if (count1 >2 || count0 >2){
+                    Logic3Col(gameboard, j);
+                }
+                if (gameboard.size - count0 == 1 || gameboard.size - count1 == 1){
+                    Logic4Col(gameboard, j);
+                }
+            }
         }
     }
+        // improve logic 3 4
+    private void Logic3Row(Board gameboard, int i) {
+        for (int j = 0; j < gameboard.size - 5; j++) {
+            if (gameboard.board[i][j + 1] == '-' && gameboard.board[i][j + 2] == '-' && gameboard.board[i][j + 3] == '-' && gameboard.board[i][j + 4] == '-') {
+                if (gameboard.board[i][j] == '0' && gameboard.board[i][j + 5] == '0') {
+                    gameboard.board[i][j + 1] = '1';
+                    gameboard.board[i][j + 4] = '1';
+                }
+                if (gameboard.board[i][j] == '1' && gameboard.board[i][j + 5] == '1') {
+                    gameboard.board[i][j + 1] = '0';
+                    gameboard.board[i][j + 4] = '0';
+                }
+            }
+        }
+    }
+
+    private void Logic4Row(Board gameboard, int i) {
+        for (int j = 0; j < gameboard.size - 5; j++) {
+            if (gameboard.board[i][j + 3] == '-' && gameboard.board[i][j + 4] == '-' && gameboard.board[i][j + 5] == '-') {
+                if (gameboard.board[i][j] == '0' && gameboard.board[i][j + 1] == '0' && gameboard.board[i][j + 2] == '1') {
+                    gameboard.board[i][j + 5] = '1';
+                }
+                if (gameboard.board[i][j] == '1' && gameboard.board[i][j + 1] == '1' && gameboard.board[i][j + 2] == '0') {
+                    gameboard.board[i][j + 5] = '0';
+                }
+            }
+        }
+    }
+
+    private void Logic3Col(Board gameboard, int j) {
+        for (int i = 0; i < gameboard.size - 5; i++) {
+            if (gameboard.board[i + 1][j] == '-' && gameboard.board[i + 2][j] == '-' && gameboard.board[i + 3][j] == '-' && gameboard.board[i + 4][j] == '-') {
+                if (gameboard.board[i][j] == '0' && gameboard.board[i + 5][j] == '0') {
+                    gameboard.board[i + 1][j] = '1';
+                    gameboard.board[i + 4][j] = '1';
+                }
+                if (gameboard.board[i][j] == '1' && gameboard.board[i][j + 5] == '1') {
+                    gameboard.board[i + 1][j] = '0';
+                    gameboard.board[i + 4][j] = '0';
+                }
+            }
+        }
+    }
+
+    private void Logic4Col(Board gameboard, int j) {
+        for (int i = 0; i < gameboard.size - 5; i++) {
+            if (gameboard.board[i + 3][j] == '-' && gameboard.board[i + 4][j] == '-' && gameboard.board[i + 5][j] == '-') {
+                if (gameboard.board[i][j] == '0' && gameboard.board[i + 1][j] == '0' && gameboard.board[i][j + 2] == '1') {
+                    gameboard.board[i + 5][j] = '1';
+                }
+                if (gameboard.board[i][j] == '1' && gameboard.board[i + 1][j] == '1' && gameboard.board[i + 2][j] == '0') {
+                    gameboard.board[i + 5][j] = '0';
+                }
+            }
+        }
+    }
+
 }
 
