@@ -1,10 +1,5 @@
 package main;
-
-//step 1: run basic algorithm until cannot solve further:
-//-> run basic algorithm until board doesnt change using String.equals()
 //step 2: implement backtracking
-
-import static main.BoardMethod.*;
 
 public class Main{
 

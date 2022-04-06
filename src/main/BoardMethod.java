@@ -1,5 +1,5 @@
 package main;
-// remove static
+
 import java.util.Objects;
 import java.util.Scanner;
 
