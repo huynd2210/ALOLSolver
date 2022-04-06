@@ -7,7 +7,7 @@ public class BoardMethod {
     public void addboard(Board gameboard) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Size ");
-        gameboard.size = sc.nextInt(); // set size of Board (Board is square)
+        gameboard.size = sc.nextInt(); // set size of Board (assume Board is square)
         gameboard.board = new char[gameboard.size][gameboard.size];
                                             // initialize board
         for (int i = 0; i < gameboard.size;) {  //marked with '-' is empty
@@ -22,7 +22,7 @@ public class BoardMethod {
             }
         }
         printBoard(gameboard);
-        Inputchange(gameboard);
+        Inputchange(gameboard);     // ask if user want to change input
     }
     private void Inputchange(Board gameboard){
         System.out.println("Change board? (y/n)");
@@ -78,7 +78,6 @@ public class BoardMethod {
     }
 
     private boolean Boardchange(Board gameboard1, Board gameboard2){
-//        String.equals();
         return BoardtoString(gameboard1).equals(BoardtoString(gameboard2));
     }
 

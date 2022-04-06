@@ -155,7 +155,7 @@ public class Logic{
             }
         }
     }
-        // improve logic 3 4
+        // improve logic 3 4 (in progress)
     private void Logic3Row(Board gameboard, int i) {
         for (int j = 0; j < gameboard.size - 5; j++) {
             if (gameboard.board[i][j + 1] == '-' && gameboard.board[i][j + 2] == '-' && gameboard.board[i][j + 3] == '-' && gameboard.board[i][j + 4] == '-') {

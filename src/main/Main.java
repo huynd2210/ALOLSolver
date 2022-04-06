@@ -1,5 +1,8 @@
 package main;
-//step 2: implement backtracking
+
+//step 1: run basic algorithm until cannot solve further: (done)
+//-> run basic algorithm until board doesnt change using String.equals()
+//step 2: implement backtracking (in progress)
 
 public class Main{
 
