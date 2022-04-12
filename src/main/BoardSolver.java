@@ -3,13 +3,18 @@ package main;
 import java.util.Objects;
 import java.util.Scanner;
 
-public class BoardMethod {
+public class BoardSolver {
     public void addboard(Board gameboard) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Size ");
         gameboard.size = sc.nextInt(); // set size of Board (assume Board is square)
         gameboard.board = new char[gameboard.size][gameboard.size];
-                                            // initialize board
+        intitalizeboard(gameboard, sc);
+        printBoard(gameboard);
+        Inputchange(gameboard);     // ask if user want to change input
+    }
+
+    private void intitalizeboard(Board gameboard, Scanner sc) {
         for (int i = 0; i < gameboard.size;) {  //marked with '-' is empty
             System.out.println("Row " + ++i);
             String row = "";
@@ -21,9 +26,8 @@ public class BoardMethod {
                 gameboard.board[i-1][j] = row.charAt(j);
             }
         }
-        printBoard(gameboard);
-        Inputchange(gameboard);     // ask if user want to change input
     }
+
     private void Inputchange(Board gameboard){
         System.out.println("Change board? (y/n)");
         Scanner sc = new Scanner(System.in);
@@ -77,14 +81,22 @@ public class BoardMethod {
         return false;
     }
 
-    private boolean Boardchange(Board gameboard1, Board gameboard2){
-        return BoardtoString(gameboard1).equals(BoardtoString(gameboard2));
+    private boolean Boardchange(Board gameboard, String previous_board){
+        return BoardtoString(gameboard).equals(previous_board);
     }
 
-    public void Solve(Board gameboard, Logic gamelogic) {
+    public void Solve(Board gameboard) {
+        Logic gamelogic= new Logic();
+
         while(findEmpty(gameboard)){
+            String previous_board = BoardtoString(gameboard);
             gamelogic.RowSolve(gameboard);
             gamelogic.ColSolve(gameboard);
+
+            if (Boardchange(gameboard, previous_board)){
+                System.out.println("No solution!");
+                System.exit(0);
+            }
         }
         printBoard(gameboard);
     }
