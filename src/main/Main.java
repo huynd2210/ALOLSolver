@@ -8,13 +8,12 @@ public class Main{
 
     public static void main(String[] args) {
         Board board1 = new Board();
-        Logic logic = new Logic();
-        BoardMethod test = new BoardMethod();
+        BoardSolver test = new BoardSolver();
         test.addboard(board1);
 
         long start = System.nanoTime();
 
-        test.Solve(board1, logic);
+        test.Solve(board1);
 
         long end = System.nanoTime();
         long execution = end - start;

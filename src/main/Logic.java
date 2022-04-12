@@ -111,7 +111,6 @@ public class Logic{
         }
     }
 
-
     private void ColFill(Board gameboard, int j, char missingelement){
         for (int i = 0; i < gameboard.size; i++) {
             if (gameboard.board[i][j] == '-'){
