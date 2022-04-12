@@ -4,27 +4,31 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class BoardSolver {
-    public void addboard(Board gameboard) {
+    public void addboard(Board gameBoard) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Size ");
-        gameboard.size = sc.nextInt(); // set size of Board (assume Board is square)
-        gameboard.board = new char[gameboard.size][gameboard.size];
-        intitalizeboard(gameboard, sc);
-        printBoard(gameboard);
-        Inputchange(gameboard);     // ask if user want to change input
+        gameBoard.size = sc.nextInt(); // set size of Board (assume Board is square)
+        gameBoard.board = new char[gameBoard.size][gameBoard.size];
+        intitalizeboard(gameBoard, sc);
+        printBoard(gameBoard);
+        Inputchange(gameBoard);     // ask if user want to change input
     }
 
-    private void intitalizeboard(Board gameboard, Scanner sc) {
-        for (int i = 0; i < gameboard.size;) {  //marked with '-' is empty
+    private void intitalizeboard(Board gameBoard, Scanner sc) {
+        for (int i = 0; i < gameBoard.size;) {  //marked with '-' is empty
             System.out.println("Row " + ++i);
             String row = "";
 
-            while (row.length() != gameboard.size) { // check if input correct
+            while (row.length() != gameBoard.size) { // check if input correct
                 row = sc.next();
             }
-            for (int j = 0; j < gameboard.size; ++j) {
-                gameboard.board[i-1][j] = row.charAt(j);
+            for (int j = 0; j < gameBoard.size; ++j) {
+                gameBoard.board[i-1][j] = row.charAt(j);
             }
+        }
+        Logic gameLogic = new Logic();
+        if (!gameLogic.isBoardCorrect(gameBoard)){
+            System.out.println("incorrect Board input ");
         }
     }
 
@@ -86,12 +90,12 @@ public class BoardSolver {
     }
 
     public void Solve(Board gameboard) {
-        Logic gamelogic= new Logic();
+        Logic gameLogic= new Logic();
 
         while(findEmpty(gameboard)){
             String previous_board = BoardtoString(gameboard);
-            gamelogic.RowSolve(gameboard);
-            gamelogic.ColSolve(gameboard);
+            gameLogic.RowSolve(gameboard);
+            gameLogic.ColSolve(gameboard);
 
             if (Boardchange(gameboard, previous_board)){
                 System.out.println("No solution!");
