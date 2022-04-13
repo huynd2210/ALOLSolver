@@ -16,8 +16,8 @@ public class Main{
         test.Solve(board1);
 
         long end = System.nanoTime();
-        long execution = end - start;
-        System.out.println("Execution time: " + execution + " nanoseconds");
+        double execution = (end - start) / 1000000.0;
+        System.out.println("Execution time: " + execution + " ms");
     }
 
 }

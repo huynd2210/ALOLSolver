@@ -9,12 +9,11 @@ public class BoardSolver {
         System.out.print("Size ");
         gameBoard.size = sc.nextInt(); // set size of Board (assume Board is square)
         gameBoard.board = new char[gameBoard.size][gameBoard.size];
-        intitalizeboard(gameBoard, sc);
-        printBoard(gameBoard);
+        intitalizeBoard(gameBoard, sc);
         Inputchange(gameBoard);     // ask if user want to change input
     }
 
-    private void intitalizeboard(Board gameBoard, Scanner sc) {
+    private void intitalizeBoard(Board gameBoard, Scanner sc) {
         for (int i = 0; i < gameBoard.size;) {  //marked with '-' is empty
             System.out.println("Row " + ++i);
             String row = "";
@@ -27,36 +26,45 @@ public class BoardSolver {
             }
         }
         Logic gameLogic = new Logic();
-        if (!gameLogic.isBoardCorrect(gameBoard)){
+        while (!gameLogic.isBoardCorrect(gameBoard)){
             System.out.println("incorrect Board input ");
+            printBoard(gameBoard);
+            System.out.println("Please change the incorrect input");
+            newInput(gameBoard);
         }
+
     }
 
-    private void Inputchange(Board gameboard){
+    private void Inputchange(Board gameBoard){
         System.out.println("Change board? (y/n)");
         Scanner sc = new Scanner(System.in);
         String in = sc.next();
 
         if (Objects.equals(in, "y")){
-            int i = 1;
-            while (i <= gameboard.size){
-                System.out.println("Row (0 to confirm change)");
-                i = sc.nextInt();
-                if (i < 1){
-                    break;
-                }
-                System.out.println("Input:");
-                String row = "";
-
-                while (row.length() != gameboard.size) {
-                    row = sc.next();
-                }
-                for (int j = 0; j < gameboard.size; ++j) {
-                    gameboard.board[i-1][j] = row.charAt(j);
-                }
-            }
-            printBoard(gameboard);
+            newInput(gameBoard);
         }
+    }
+
+    private void newInput(Board gameBoard) {
+        int i = 1;
+        while (i <= gameBoard.size){
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Row (0 to confirm change)");
+            i = sc.nextInt();
+            if (i < 1){
+                break;
+            }
+            System.out.println("Input:");
+            String row = "";
+
+            while (row.length() != gameBoard.size) {
+                row = sc.next();
+            }
+            for (int j = 0; j < gameBoard.size; ++j) {
+                gameBoard.board[i-1][j] = row.charAt(j);
+            }
+        }
+        printBoard(gameBoard);
     }
 
     public void printBoard(Board gameboard) {
