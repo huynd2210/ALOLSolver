@@ -1,5 +1,7 @@
 package main;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -82,25 +84,29 @@ public class BoardSolver {
         return sb.toString();
     }
 
-    private boolean findEmpty(Board gameboard){ // find empty place to fill
+    private List<Integer> findEmpty(Board gameboard){ // find empty place to fill
         for (int row = 0; row < gameboard.size; row++){
             for (int col = 0; col < gameboard.size; col++){
                 if (gameboard.board[row][col] == '-'){ //marked with '-' is empty
-                    return true;
+                    return List.of(row, col);
                 }
             }
         }
-        return false;
+        return new ArrayList<>();
     }
 
     private boolean Boardchange(Board gameboard, String previous_board){
         return BoardtoString(gameboard).equals(previous_board);
     }
 
+    public void backtrack(Board board, Logic logic){
+//        while
+    }
+
     public void Solve(Board gameboard) {
         Logic gameLogic= new Logic();
 
-        while(findEmpty(gameboard)){
+        while(!findEmpty(gameboard).isEmpty()){
             String previous_board = BoardtoString(gameboard);
             gameLogic.RowSolve(gameboard);
             gameLogic.ColSolve(gameboard);
